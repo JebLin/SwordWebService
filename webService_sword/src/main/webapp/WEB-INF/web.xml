@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/">
+    <!-- 启动 Spring 容器 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml,
+         /WEB-INF/wsContext.xml</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!-- 表明所有来自/fkservice/* 的请求，都交给 CXFServlet 处理。 -->
+    <servlet>
+        <servlet-name>cxf</servlet-name>
+        <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>cxf</servlet-name>
+        <url-pattern>/fkservice/*</url-pattern>
+        <!-- 待会在网页输入 http://localhost:8083/webService_sword/fkservice 可看到相关信息 -->
+    </servlet-mapping>
+
+    <!-- 项目首页 -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+</Context>

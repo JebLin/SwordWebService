@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://cxf.apache.org/jaxws
+       http://cxf.apache.org/schemas/jaxws.xsd">
+
+  <!--
+      Web 应用的类加载器路径有两类：
+          A.WEB-INF/classes 目录
+          B.WEB-INF/lib 目录。
+  -->
+  <import resource="classpath:META-INF/cxf/cxf.xml" />
+  <import resource="classpath:META-INF/cxf/cxf-extension-jaxws.xml" />
+  <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+  <bean id="userService" class="indi.sword.cxf.impl.UserServiceImpl" />
+
+  <bean id="helloWorldWs" class="indi.sword.cxf.impl.HelloworldWsImpl" p:us-ref="userService" />
+  <jaxws:endpoint implementor="#helloWorldWs" address="/fkjava">
+    <!-- 添加2个 In 拦截器 -->
+    <jaxws:inInterceptors>
+      <bean class="org.apache.indi.sword.cxf.interceptor.LoggingInInterceptor" />
+      <bean class="indi.sword.indi.sword.cxf.interceptor.MyServerAuthInterceptor" />
+    </jaxws:inInterceptors>
+    <!-- 如果要配置Out拦截器，使用 OutInterceptors  -->
+  </jaxws:endpoint>
+</beans>

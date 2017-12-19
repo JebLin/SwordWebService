@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="webService_sword:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="webService_sword-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="webService_sword:war exploded" />
+    </root>
+  </artifact>
+</component>
